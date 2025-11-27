@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-API Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: #667eea;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .search-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .search-section input,
+        .search-section select {
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            font-size: 1em;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .search-section input:focus,
+        .search-section select:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 8px rgba(118, 75, 162, 0.3);
+        }
+
+        .search-section button {
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .search-section button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            background: #ffd700;
+            color: #333;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .error {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .no-results {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .fact-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.8;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+        }
+
+        .fact-box button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .fact-box button:hover {
+            background: #764ba2;
+        }
+
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .weather-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .weather-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .weather-card .value {
+            font-size: 2em;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .info-text {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Multi-API Explorer</h1>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="movies">🎬 Películas</button>
+            <button class="tab-btn" data-tab="dogs">🐕 Perros</button>
+            <button class="tab-btn" data-tab="cats">🐱 Gatos</button>
+            <button class="tab-btn" data-tab="weather">🌤️ Clima</button>
+        </div>
+
+        <!-- PELÍCULAS -->
+        <div id="movies" class="tab-content active">
+            <div class="search-section">
+                <input type="text" id="movieInput" placeholder="Buscar película o serie...">
+                <select id="typeSelect">
+                    <option value="">Todos</option>
+                    <option value="movie">Película</option>
+                    <option value="series">Serie</option>
+                </select>
+                <button onclick="searchMovies()">Buscar</button>
+                <p class="info-text">💡 API key gratuita: 1000 requests/día</p>
+            </div>
+            <div id="moviesResults" class="results"></div>
+        </div>
+
+        <!-- PERROS -->
+        <div id="dogs" class="tab-content">
+            <div class="search-section">
+                <select id="breedSelect">
+                    <option value="">Cargar razas...</option>
+                </select>
+                <button onclick="loadDogImage()">Obtener imagen</button>
+                <button onclick="loadRandomDog()">Aleatorio</button>
+                <p class="info-text">💡 Sin requisitos de API key</p>
+            </div>
+            <div id="dogsResults" class="results"></div>
+        </div>
+
+        <!-- GATOS -->
+        <div id="cats" class="tab-content">
+            <div class="search-section">
+                <button onclick="loadCatFact()">Nuevo dato curioso</button>
+                <p class="info-text">💡 Sin requisitos de API key</p>
+            </div>
+            <div id="catsResults"></div>
+        </div>
+
+        <!-- CLIMA -->
+        <div id="weather" class="tab-content">
+            <div class="search-section">
+                <input type="text" id="cityInput" placeholder="Ingresa ciudad (ej: Madrid, London)...">
+                <button onclick="searchWeather()">Buscar clima</button>
+                <p class="info-text">💡 1M requests/mes gratis</p>
+            </div>
+            <div id="weatherResults"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
