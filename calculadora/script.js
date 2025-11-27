@@ -1,4 +1,4 @@
-c,d// script.js
+// script.js
 // Calculadora en JavaScript (sin eval) con soporte de teclado y comentarios en español
 
 (function () {
