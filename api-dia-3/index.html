@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pokédex</h1>
+            <p class="subtitle">Busca tu Pokémon favorito</p>
+        </header>
+
+        <div class="search-box">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="search-input" 
+                placeholder="Escribe el nombre del Pokémon..."
+            />
+            <button id="searchBtn" class="search-btn">Buscar</button>
+        </div>
+
+        <main id="app" class="app-content">
+            <div class="welcome-message">
+                <p>👋 Escribe el nombre de un Pokémon para comenzar</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="api.js" defer></script>
+</body>
+</html>

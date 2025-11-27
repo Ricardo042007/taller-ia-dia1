@@ -1,0 +1,86 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Validador de Palíndromos</title>
+	<style>
+		:root{font-family:Segoe UI, Roboto, Arial, sans-serif;color:#222}
+		body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f7f9fc;margin:0}
+		.card{background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(15,30,60,.08);padding:24px;max-width:520px;width:94%}
+		h1{margin:0 0 8px;font-size:1.25rem}
+		p.lead{margin:0 0 18px;color:#555}
+		.row{display:flex;gap:8px}
+		input[type="text"]{flex:1;padding:10px 12px;border:1px solid #d6dbe6;border-radius:6px;font-size:1rem}
+		button{padding:10px 14px;border-radius:6px;border:0;background:#2563eb;color:#fff;cursor:pointer}
+		button.secondary{background:#6b7280}
+		.result{margin-top:14px;padding:12px;border-radius:6px;font-weight:600}
+		.ok{background:#ecfdf5;color:#065f46;border:1px solid #bbf7d0}
+		.no{background:#fff7f6;color:#7f1d1d;border:1px solid #fecaca}
+		.notes{margin-top:12px;color:#444;font-size:.95rem}
+		ul.examples{margin:8px 0 0 18px;color:#333}
+		footer{margin-top:14px;font-size:.85rem;color:#666}
+	</style>
+</head>
+<body>
+	<main class="card" role="main">
+		<h1>Validador de Palíndromos</h1>
+		<p class="lead">Escribe un texto y pulsa <strong>Comprobar</strong> para ver si es un palíndromo.</p>
+
+		<div class="row">
+			<input id="inputTexto" type="text" placeholder="Ej.: reconocer, Ana, 'A man a plan'" aria-label="Texto a comprobar">
+			<button id="btnComprobar">Comprobar</button>
+		</div>
+
+		<div id="salida" class="result" style="display:none"></div>
+
+		<div class="notes">
+			<strong>Ejemplos:</strong>
+			<ul class="examples">
+				<li>reconocer</li>
+				<li>analina</li>
+				<li>oso</li>
+				<li>Ana (mayúsculas ignoradas)</li>
+			</ul>
+			<footer>Nota: la función en `palindromo.js` elimina espacios y normaliza a minúsculas antes de comparar. No elimina signos de puntuación ni normaliza acentos.</footer>
+		</div>
+
+	</main>
+
+	<script src="palindromo.js"></script>
+	<script>
+		(function(){
+			const input = document.getElementById('inputTexto');
+			const btn = document.getElementById('btnComprobar');
+			const salida = document.getElementById('salida');
+
+			function mostrarResultado(text, es){
+				salida.style.display = 'block';
+				salida.textContent = text;
+				salida.className = 'result ' + (es ? 'ok' : 'no');
+			}
+
+			function comprobar(){
+				const txt = input.value.trim();
+				if(!txt){
+					salida.style.display='none';
+					return;
+				}
+
+				if(typeof esPalindromo !== 'function'){
+					mostrarResultado('Error: no se encontró la función `esPalindromo` en `palindromo.js`.', false);
+					return;
+				}
+
+				const es = esPalindromo(txt);
+				if(es) mostrarResultado(`"${txt}" es un palíndromo.`, true);
+				else mostrarResultado(`"${txt}" NO es un palíndromo.`, false);
+			}
+
+			btn.addEventListener('click', comprobar);
+			input.addEventListener('keydown', function(e){ if(e.key === 'Enter') comprobar(); });
+		})();
+	</script>
+</body>
+</html>
