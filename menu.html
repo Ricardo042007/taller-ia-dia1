@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú de Proyectos - Taller de Programación</title>
+    <title>Menú de Proyectos - Taller de Programación con IA</title>
     <style>
         * {
             margin: 0;
@@ -11,9 +11,18 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --border-light: #ecf0f1;
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -26,29 +35,54 @@
             border-radius: 20px;
             box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25);
             padding: 50px 40px;
-            max-width: 900px;
+            max-width: 1200px;
             width: 100%;
+            animation: slideUp 0.6s var(--transition-smooth);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         header {
             text-align: center;
             margin-bottom: 50px;
+            animation: fadeIn 0.8s var(--transition-smooth) 0.1s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         h1 {
-            color: #2c3e50;
+            color: var(--text-dark);
             font-size: 2.8em;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .subtitle {
-            color: #7f8c8d;
+            color: var(--text-light);
             font-size: 1.1em;
             font-weight: 300;
+            animation: fadeIn 0.8s var(--transition-smooth) 0.2s both;
         }
 
         .menu-grid {
@@ -60,10 +94,10 @@
 
         .menu-card {
             background: white;
-            border: 2px solid #ecf0f1;
+            border: 2px solid var(--border-light);
             border-radius: 12px;
             padding: 25px;
-            transition: all 0.3s ease;
+            transition: all var(--transition-smooth);
             cursor: pointer;
             text-decoration: none;
             color: inherit;
@@ -71,63 +105,131 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            min-height: 250px;
+            min-height: 280px;
             justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s var(--transition-smooth) both;
         }
 
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left var(--transition-smooth);
+        }
+
+        .menu-card:hover::before {
+            left: 100%;
+        }
+
+        .menu-card:nth-child(1) { animation-delay: 0.1s; }
+        .menu-card:nth-child(2) { animation-delay: 0.15s; }
+        .menu-card:nth-child(3) { animation-delay: 0.2s; }
+        .menu-card:nth-child(4) { animation-delay: 0.25s; }
+        .menu-card:nth-child(5) { animation-delay: 0.3s; }
+        .menu-card:nth-child(6) { animation-delay: 0.35s; }
+        .menu-card:nth-child(7) { animation-delay: 0.4s; }
+        .menu-card:nth-child(8) { animation-delay: 0.45s; }
+
         .menu-card:hover {
-            transform: translateY(-5px);
-            border-color: #667eea;
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.3);
         }
 
         .menu-card:active {
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
         }
 
         .card-icon {
             font-size: 3.5em;
             margin-bottom: 15px;
+            display: inline-block;
+            transition: transform var(--transition-smooth);
+            animation: bounce 0.6s ease-out 0.5s;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: scale(0.8);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .menu-card:hover .card-icon {
+            transform: scale(1.15) rotate(5deg);
         }
 
         .card-title {
             font-size: 1.4em;
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--text-dark);
             margin-bottom: 10px;
+            transition: color var(--transition-smooth);
+        }
+
+        .menu-card:hover .card-title {
+            color: var(--primary-color);
         }
 
         .card-description {
-            color: #7f8c8d;
+            color: var(--text-light);
             font-size: 0.95em;
-            line-height: 1.5;
+            line-height: 1.6;
+            transition: color var(--transition-smooth);
+        }
+
+        .menu-card:hover .card-description {
+            color: var(--text-dark);
         }
 
         .card-button {
             display: inline-block;
             margin-top: 15px;
             padding: 10px 25px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
             border-radius: 25px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all var(--transition-smooth);
             border: none;
             cursor: pointer;
             font-size: 0.95em;
+            position: relative;
+            z-index: 2;
         }
 
         .menu-card:hover .card-button {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            transform: scale(1.08);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .menu-card:active .card-button {
+            transform: scale(0.98);
         }
 
         .footer {
             text-align: center;
-            color: #95a5a6;
+            color: var(--text-light);
             font-size: 0.9em;
             padding-top: 30px;
-            border-top: 1px solid #ecf0f1;
+            border-top: 1px solid var(--border-light);
+            animation: fadeIn 0.8s var(--transition-smooth) 0.5s both;
         }
 
         @media (max-width: 600px) {
@@ -147,20 +249,24 @@
             .card-icon {
                 font-size: 2.5em;
             }
+
+            .menu-card {
+                min-height: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🎓 Taller de Programación</h1>
-            <p class="subtitle">Selecciona un proyecto para comenzar</p>
+            <h1>🤖 Taller de Programación con IA</h1>
+            <p class="subtitle">Explora nuestros proyectos interactivos</p>
         </header>
 
         <div class="menu-grid">
             <!-- Calculadora -->
             <a href="calculadora/index.html" class="menu-card">
-                <div>
+                <div class="card-content">
                     <div class="card-icon">🧮</div>
                     <div class="card-title">Calculadora</div>
                     <div class="card-description">Una calculadora simple con interfaz intuitiva para realizar operaciones básicas</div>
@@ -170,7 +276,7 @@
 
             <!-- Reloj Digital -->
             <a href="reloj_digital/index.html" class="menu-card">
-                <div>
+                <div class="card-content">
                     <div class="card-icon">⏰</div>
                     <div class="card-title">Reloj Digital</div>
                     <div class="card-description">Visualiza la hora actual en formato digital con actualizaciones en tiempo real</div>
@@ -180,7 +286,7 @@
 
             <!-- Generador de Colores -->
             <a href="generador_colores/index.html" class="menu-card">
-                <div>
+                <div class="card-content">
                     <div class="card-icon">🎨</div>
                     <div class="card-title">Generador de Colores</div>
                     <div class="card-description">Genera y explora paletas de colores aleatorios de forma interactiva</div>
@@ -190,17 +296,57 @@
 
             <!-- Analizador de Texto -->
             <a href="analizador_texto/index.html" class="menu-card">
-                <div>
+                <div class="card-content">
                     <div class="card-icon">📝</div>
                     <div class="card-title">Analizador de Texto</div>
                     <div class="card-description">Analiza textos: cuenta palabras, caracteres y obtén estadísticas detalladas</div>
                 </div>
                 <button class="card-button">Abrir →</button>
             </a>
+
+            <!-- Tamagotchi -->
+            <a href="tamagochi/index.html" class="menu-card">
+                <div class="card-content">
+                    <div class="card-icon">🐹</div>
+                    <div class="card-title">Tamagotchi</div>
+                    <div class="card-description">Cuida a tu mascota virtual: aliméntala, juega con ella y mantén su felicidad</div>
+                </div>
+                <button class="card-button">Abrir →</button>
+            </a>
+
+            <!-- Galería de Perros -->
+            <a href="galeria-perros/index.html" class="menu-card">
+                <div class="card-content">
+                    <div class="card-icon">🐕</div>
+                    <div class="card-title">Galería de Perros</div>
+                    <div class="card-description">Descubre una galería de diferentes razas de perros con imágenes y descripciones</div>
+                </div>
+                <button class="card-button">Abrir →</button>
+            </a>
+
+            <!-- API Rick y Morty -->
+            <a href="api-rick-morty/index.html" class="menu-card">
+                <div class="card-content">
+                    <div class="card-icon">👽</div>
+                    <div class="card-title">Rick y Morty</div>
+                    <div class="card-description">Explora el universo de Rick y Morty con datos consumidos desde una API real</div>
+                </div>
+                <button class="card-button">Abrir →</button>
+            </a>
+
+            <!-- API Día 3 -->
+            <a href="api-dia-3/index.html" class="menu-card">
+                <div class="card-content">
+                    <div class="card-icon">🌐</div>
+                    <div class="card-title">API Consultas</div>
+                    <div class="card-description">Aprende a consumir y trabajar con APIs externas en tiempo real</div>
+                </div>
+                <button class="card-button">Abrir →</button>
+            </a>
         </div>
 
         <footer class="footer">
-            <p>💡 Hecho por Ricardo Albornoz_Taller de Programación  </p>
+            <p>💡 Hecho por Ricardo Albornoz | Taller de Programación con IA</p>
         </footer>
     </div>
 </body>
