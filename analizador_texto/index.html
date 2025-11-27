@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador de Texto - Estadísticas en Tiempo Real</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📝 Analizador de Texto</h1>
+            <p class="subtitle">Obtén estadísticas en tiempo real mientras escribes</p>
+        </header>
+
+        <!-- Sección de textarea principal -->
+        <div class="editor-section">
+            <textarea 
+                id="textInput" 
+                class="text-editor"
+                placeholder="Escribe o pega tu texto aquí para obtener estadísticas en tiempo real..."
+                spellcheck="true">
+            </textarea>
+        </div>
+
+        <!-- Sección de estadísticas -->
+        <div class="stats-section">
+            <h2>📊 Estadísticas</h2>
+            
+            <div class="stats-grid">
+                <!-- Tarjeta: Caracteres con espacios -->
+                <div class="stat-card stat-characters-total">
+                    <div class="stat-icon">🔤</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Caracteres (con espacios)</span>
+                        <span class="stat-value" id="charCountTotal">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta: Caracteres sin espacios -->
+                <div class="stat-card stat-characters-no-space">
+                    <div class="stat-icon">📌</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Caracteres (sin espacios)</span>
+                        <span class="stat-value" id="charCountNoSpace">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta: Palabras -->
+                <div class="stat-card stat-words">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Palabras</span>
+                        <span class="stat-value" id="wordCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta: Oraciones -->
+                <div class="stat-card stat-sentences">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Oraciones</span>
+                        <span class="stat-value" id="sentenceCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta: Tiempo de lectura -->
+                <div class="stat-card stat-reading-time">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Tiempo de lectura</span>
+                        <span class="stat-value" id="readingTime">0 min</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta: Densidad de palabras -->
+                <div class="stat-card stat-density">
+                    <div class="stat-icon">📈</div>
+                    <div class="stat-content">
+                        <span class="stat-label">Palabras únicas</span>
+                        <span class="stat-value" id="uniqueWords">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de acciones -->
+        <div class="actions-section">
+            <button id="clearBtn" class="btn btn-clear">
+                🗑️ Limpiar
+            </button>
+            <button id="copyStatsBtn" class="btn btn-copy">
+                📋 Copiar Estadísticas
+            </button>
+            <button id="downloadBtn" class="btn btn-download">
+                ⬇️ Descargar Análisis
+            </button>
+        </div>
+
+        <!-- Notificación de feedback -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator" role="application" aria-label="Calculadora">
+    <div id="display" class="display" aria-live="polite">0</div>
+
+    <div class="keys" id="keys">
+      <button class="btn func" data-action="clear" aria-label="Limpiar">C</button>
+      <button class="btn func" data-action="backspace" aria-label="Borrar">⌫</button>
+      <button class="btn op" data-value="%" aria-label="Porcentaje">%</button>
+      <button class="btn op" data-value="/" aria-label="Dividir">÷</button>
+
+      <button class="btn num" data-value="7">7</button>
+      <button class="btn num" data-value="8">8</button>
+      <button class="btn num" data-value="9">9</button>
+      <button class="btn op" data-value="*" aria-label="Multiplicar">×</button>
+
+      <button class="btn num" data-value="4">4</button>
+      <button class="btn num" data-value="5">5</button>
+      <button class="btn num" data-value="6">6</button>
+      <button class="btn op" data-value="-" aria-label="Restar">−</button>
+
+      <button class="btn num" data-value="1">1</button>
+      <button class="btn num" data-value="2">2</button>
+      <button class="btn num" data-value="3">3</button>
+      <button class="btn op" data-value="+" aria-label="Sumar">+</button>
+
+      <button class="btn num zero" data-value="0">0</button>
+      <button class="btn num" data-value=".">.</button>
+      <button class="btn func equal" data-action="equal" aria-label="Igual">=</button>
+    </div>
+  </main>
+  <!-- Sección: Conversor de Unidades (Celsius -> Fahrenheit) -->
+  <section class="converter" id="converter" style="max-width:340px;margin:18px auto;padding:12px;background:#fff;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,42,0.06);">
+    <h2 style="margin:0 0 8px 0;font-size:1.05rem;">Conversor de Unidades</h2>
+    <label for="celsiusInput" style="display:block;margin-bottom:6px;">Grados Celsius:</label>
+    <div style="display:flex;gap:8px;">
+      <input id="celsiusInput" type="number" step="any" placeholder="Ej. 25" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:6px;" aria-label="Grados Celsius" />
+      <button id="convertBtn" style="padding:8px 12px;border-radius:6px;border:0;background:#0b5fff;color:#fff;cursor:pointer;">Convertir</button>
+    </div>
+    <p style="margin:10px 0 0 0;">Resultado: <strong id="fahrenheitOutput">--</strong> °F</p>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

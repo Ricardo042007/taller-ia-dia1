@@ -1,0 +1,426 @@
+/* ===================================
+   ANALIZADOR DE TEXTO - ESTILOS
+   =================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cuerpo de la página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 1000px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    animation: slideIn 0.6s ease-out;
+}
+
+/* Animación de entrada */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Encabezado */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 42px;
+    color: #333;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #888;
+    font-style: italic;
+}
+
+/* Sección del editor de texto */
+.editor-section {
+    margin-bottom: 40px;
+}
+
+.text-editor {
+    width: 100%;
+    height: 250px;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #333;
+    resize: vertical;
+    transition: all 0.3s ease;
+    outline: none;
+    background: #f9f9f9;
+}
+
+.text-editor:focus {
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.text-editor::placeholder {
+    color: #bbb;
+}
+
+/* Sección de estadísticas */
+.stats-section {
+    margin-bottom: 40px;
+}
+
+.stats-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Grid de tarjetas de estadísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de estadística */
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Colores diferenciados para cada métrica */
+.stat-characters-total {
+    border-color: #ff6b6b;
+    background: linear-gradient(135deg, #ffe3e3 0%, #fff5f5 100%);
+}
+
+.stat-characters-total .stat-icon {
+    color: #ff6b6b;
+}
+
+.stat-characters-total .stat-value {
+    color: #ff6b6b;
+}
+
+.stat-characters-no-space {
+    border-color: #4ecdc4;
+    background: linear-gradient(135deg, #e3f9f7 0%, #f5fffe 100%);
+}
+
+.stat-characters-no-space .stat-icon {
+    color: #4ecdc4;
+}
+
+.stat-characters-no-space .stat-value {
+    color: #4ecdc4;
+}
+
+.stat-words {
+    border-color: #45b7d1;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f5fafe 100%);
+}
+
+.stat-words .stat-icon {
+    color: #45b7d1;
+}
+
+.stat-words .stat-value {
+    color: #45b7d1;
+}
+
+.stat-sentences {
+    border-color: #ffa502;
+    background: linear-gradient(135deg, #fff3e0 0%, #fffbf5 100%);
+}
+
+.stat-sentences .stat-icon {
+    color: #ffa502;
+}
+
+.stat-sentences .stat-value {
+    color: #ffa502;
+}
+
+.stat-reading-time {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #eef2ff 0%, #f5f8ff 100%);
+}
+
+.stat-reading-time .stat-icon {
+    color: #667eea;
+}
+
+.stat-reading-time .stat-value {
+    color: #667eea;
+}
+
+.stat-density {
+    border-color: #764ba2;
+    background: linear-gradient(135deg, #f3e5f5 0%, #faf5ff 100%);
+}
+
+.stat-density .stat-icon {
+    color: #764ba2;
+}
+
+.stat-density .stat-value {
+    color: #764ba2;
+}
+
+/* Sección de acciones */
+.actions-section {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Botones */
+.btn {
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Botón Limpiar */
+.btn-clear {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+}
+
+.btn-clear:hover {
+    background: linear-gradient(135deg, #ff7777 0%, #f56b5e 100%);
+}
+
+/* Botón Copiar Estadísticas */
+.btn-copy {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+    color: white;
+}
+
+.btn-copy:hover {
+    background: linear-gradient(135deg, #5edccf 0%, #52b399 100%);
+}
+
+/* Botón Descargar */
+.btn-download {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-download:hover {
+    background: linear-gradient(135deg, #7a8df0 0%, #8558ae 100%);
+}
+
+/* Notificación de feedback */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    background: #333;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateY(30px) translateX(400px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-weight: 500;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+    pointer-events: auto;
+}
+
+.notification.success {
+    background: #4ecdc4;
+}
+
+.notification.error {
+    background: #ff6b6b;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 95%;
+    }
+
+    .header h1 {
+        font-size: 32px;
+    }
+
+    .text-editor {
+        height: 200px;
+        font-size: 14px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    .actions-section {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header {
+        margin-bottom: 25px;
+    }
+
+    .text-editor {
+        height: 180px;
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .stats-section h2 {
+        font-size: 20px;
+    }
+
+    .stat-icon {
+        font-size: 24px;
+    }
+
+    .stat-value {
+        font-size: 20px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}

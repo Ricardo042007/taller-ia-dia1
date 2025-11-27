@@ -1,0 +1,28 @@
+Crea una calculadora web completa usando solo HTML, CSS y JavaScript (sin frameworks). Responde con los tres archivos listos para usar: `index.html`, `style.css`, `script.js`.
+
+Requisitos funcionales:
+1. Interfaz con botones: 0-9, ., +, -, ×, ÷, %, =, C (clear) y ⌫ (backspace).
+2. Display superior que muestra la entrada y el resultado.
+3. Soporte de interacción por:
+   - Click/tap en botones.
+   - Teclado: teclas numéricas 0-9 y "."; operadores + - * / (mapear × y ÷ si se usan símbolos); Enter o = para calcular; Backspace para borrar; Esc o C para limpiar.
+4. Respeta precedencia de operadores y paréntesis; manejo de signo unario (negativo).
+5. Evitar `eval()`; usar un parser seguro (por ejemplo shunting-yard + RPN) o validación estricta antes de evaluar.
+6. Validaciones: evitar dos puntos en un número, evitar operadores repetidos inválidos, manejar división por cero con mensaje de error.
+7. UI responsiva y accesible (botones con `aria-label`, foco visible). Botones muestran estados `:active` y `:focus`.
+8. Código comentado en español, claro para principiantes.
+
+Requisitos de entrega:
+- `index.html`: estructura con `display`, botones y carga de `style.css` y `script.js`.
+- `style.css`: estilos básicos y responsivos.
+- `script.js`: lógica, manejo de clicks y teclado, parser seguro, y comentarios explicativos.
+- Indicar cómo probar localmente (abrir `index.html` o servir con `python -m http.server`).
+
+Criterios de aceptación (tests manuales):
+- Tecla "5" → aparece 5 en display.
+- Secuencia: 2 + 3 Enter → muestra 5.
+- Backspace elimina un carácter.
+- Esc o C limpia la pantalla.
+- Click en botones y teclado producen el mismo efecto.
+
+Notas opcionales (mejoras futuras): historial de operaciones, función de memoria (M+/M-), y animaciones en botones.
